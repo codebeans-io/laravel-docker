@@ -1,5 +1,6 @@
 ### CodeBeans Laravel Docker
 ![CI](https://github.com/codebeans-io/laravel-docker/actions/workflows/release.yml/badge.svg)
+
 This repo contains the Dockerfile to build a single Docker image for running your Laravel applications. This image can be used locally, or in production.
 
 This image contains:
