@@ -1,0 +1,20 @@
+name: Build
+on:
+  push:
+    branches-ignore:
+      - main
+jobs:
+  build_and_push:
+    name: Build  & Push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set env
+        run: echo "RELEASE_VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
+      - name: Login to Dockerhub
+        run: docker login --username ${{ secrets.DOCKERHUB_USER }} --password ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build
+        run: docker build . -t codebeans/laravel:${{ env.RELEASE_VERSION }}
+      - name: Push
+        run: docker push codebeans/laravel:${{ env.RELEASE_VERSION }}
